@@ -133,11 +133,20 @@ int main(int argc, char * argv[])
     {
       sf::Text text(font);
 
+      float shapeX = shape.shape->getPosition().x;
+      float shapeY = shape.shape->getPosition().y;
+
+      float shapeWidth = shape.shape->getLocalBounds().size.x;
+      float shapeHeight = shape.shape->getLocalBounds().size.y;
+
+
       text.setCharacterSize(fontSize);
 
       text.setString(shape.name);
-      text.setPosition({shape.shape->getPosition().x, shape.shape->getPosition().y});
 
+      text.setOrigin(text.getGlobalBounds().size / 2.f + text.getLocalBounds().position);
+      // text.setPosition(shape.shape->getPosition() + (shape.shape->getLocalBounds().size / 2.f));
+      text.setPosition({shapeX + (shapeWidth / 2.f), shapeY + (shapeHeight / 2.f)});
 
       shape.update(window);
       window.draw(*shape.shape);

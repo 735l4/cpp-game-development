@@ -1,2 +1,3 @@
 compiler_commands.json
 .DS_STORE
+bin/sfmlgame
