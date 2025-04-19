@@ -1,0 +1,8 @@
+[
+  {
+    "directory": "/absolute/path/to/your/project",
+    "command": "g++ -I/opt/homebrew/include -std=c++17 -o bin/sfmlgame -c src/main.cpp",
+    "file": "src/main.cpp"
+  }
+]
+
