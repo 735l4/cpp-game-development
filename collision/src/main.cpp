@@ -62,7 +62,7 @@ int main(int argc, char * argv[])
 
 
   sf::Text text(font);
-  std::vector<SharedShape> shapes;
+  std::vector<std::shared_ptr<SharedShape>> shapes;
   std::string configLine;
 
   if (!fin.is_open()) {
@@ -90,7 +90,7 @@ int main(int argc, char * argv[])
       circle->setPosition({x, y});
       circle->setFillColor(sf::Color(r,g,b));
 
-      shapes.push_back(SharedShape({circle, vx, vy, name}));
+      shapes.push_back(std::make_shared<SharedShape>(circle, vx, vy, name));
 
     } else if (type == "Rectangle") {
       std::string name;
@@ -104,7 +104,7 @@ int main(int argc, char * argv[])
       rect->setPosition({x, y});
       rect->setFillColor(sf::Color(r,g,b));
 
-      shapes.push_back(SharedShape({rect, vx, vy, name}));
+      shapes.push_back(std::make_shared<SharedShape>(rect, vx, vy, name));
     }
   }
 
@@ -129,27 +129,27 @@ int main(int argc, char * argv[])
     window.clear(sf::Color::Black);
 
 
-    for(auto& shape : shapes)
+    for(auto& dShape : shapes)
     {
       sf::Text text(font);
 
-      float shapeX = shape.shape->getPosition().x;
-      float shapeY = shape.shape->getPosition().y;
+      float shapeX = dShape->shape->getPosition().x;
+      float shapeY = dShape->shape->getPosition().y;
 
-      float shapeWidth = shape.shape->getLocalBounds().size.x;
-      float shapeHeight = shape.shape->getLocalBounds().size.y;
+      float shapeWidth = dShape->shape->getLocalBounds().size.x;
+      float shapeHeight = dShape->shape->getLocalBounds().size.y;
 
 
       text.setCharacterSize(fontSize);
 
-      text.setString(shape.name);
+      text.setString(dShape->name);
 
       text.setOrigin(text.getGlobalBounds().size / 2.f + text.getLocalBounds().position);
       // text.setPosition(shape.shape->getPosition() + (shape.shape->getLocalBounds().size / 2.f));
       text.setPosition({shapeX + (shapeWidth / 2.f), shapeY + (shapeHeight / 2.f)});
 
-      shape.update(window);
-      window.draw(*shape.shape);
+      dShape->update(window);
+      window.draw(*dShape->shape);
       window.draw(text);
     }
 
