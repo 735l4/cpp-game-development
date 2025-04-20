@@ -113,7 +113,7 @@ int main(int argc, char * argv[])
   }
 
 
-  sf::RenderWindow window(sf::VideoMode({800, 800}), "SFML Project");
+  sf::RenderWindow window(sf::VideoMode({wWidth, wHeight}), "SFML Project");
 
   window.setFramerateLimit(120.f);
 

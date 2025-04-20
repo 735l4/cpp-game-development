@@ -1,4 +1,4 @@
-Window 800 600
+Window 500 500
 Font fonts/tech.ttf 18 0 255 255
 Circle CGreen 100 100 -0.03 0.02 0 255 0 50
 Circle CBlue 200 200 0.02 0.04 0 0 255 100
